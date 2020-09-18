@@ -1,9 +1,6 @@
-# streaming-data-importer
+# Streaming Data Importer
 
-## Simple shovel utility to move messages from S3 to Hbase with versioning
+For all intents and purposes, this repo currently stands as an exact copy of dwp/kafka-to-hbase. This is intentional.
+Intended to be a new application, the streaming data importer, will be a refactor of kafka-to-hbase. 
 
-This repo contains Makefile to fit the standard pattern.
-This repo is a base to create new non-Terraform repos, adding the githooks submodule, making the repo ready for use.
-
-After cloning this repo, please run:  
-`make bootstrap`
+In order to build out the repo, infrastructure and pipelines necessary to aid the development of this new application, it was decided that an exact copy of kafka-to-hbase code base would be used.
