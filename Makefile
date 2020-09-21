@@ -36,83 +36,15 @@ local-test: ## Run the unit tests with gradle
 
 local-all: local-build local-test local-dist ## Build and test with gradle
 
-services: ## Bring up supporting services in docker
-	docker-compose -f docker-compose.yaml up --build -d zookeeper kafka hbase aws-s3 metadatastore
-	@{ \
-		while ! docker logs aws-s3 2> /dev/null | grep -q $(S3_READY_REGEX); do \
-			echo Waiting for s3.; \
-			sleep 2; \
-		done; \
-	}
-	docker-compose up --build s3-provision
-	docker-compose up --build -d kafka2s3
-
-up: services ## Bring up Kafka2Hbase in Docker with supporting services
-	docker-compose -f docker-compose.yaml up --build -d kafka2hbase kafka2hbaseequality
-
-restart: ## Restart Kafka2Hbase and all supporting services
-	docker-compose restart
-
-down: ## Bring down the Kafka2Hbase Docker container and support services
-	docker-compose down
-
-destroy: down ## Bring down the Kafka2Hbase Docker container and services then delete all volumes
-	docker network prune -f
-	docker volume prune -f
-
 integration-test: ## Run the integration tests in a Docker container
-	@{ \
-		set +e ;\
-		docker stop integration-test ;\
-		docker rm integration-test ;\
- 		set -e ;\
- 	}
-	docker-compose -f docker-compose.yaml run --name integration-test integration-test gradle --no-daemon --rerun-tasks integration-test -x test -x integration-load-test -x integration-test-equality
+	echo "WIP"
 
 integration-test-equality: ## Run the integration tests in a Docker container
-	@{ \
-		set +e ;\
-		docker stop integration-test ;\
-		docker rm integration-test ;\
- 		set -e ;\
- 	}
-	docker-compose -f docker-compose.yaml run --name integration-test integration-test gradle --no-daemon --rerun-tasks integration-test-equality -x test -x integration-load-test -x integration-test
+	echo "WIP"
 
 integration-load-test: ## Run the integration load tests in a Docker container
-	@{ \
-		set +e ;\
-		docker stop integration-load-test ;\
-		docker rm integration-load-test ;\
- 		set -e ;\
- 	}
-	docker-compose -f docker-compose.yaml run --name integration-load-test integration-test gradle --no-daemon --rerun-tasks integration-load-test -x test -x integration-test
+	echo "WIP"
 
 .PHONY: integration-all ## Build and Run all the tests in containers from a clean start
-integration-all: down destroy build up integration-test integration-test-equality
-
-hbase-shell: ## Open an Hbase shell onto the running Hbase container
-	docker-compose run --rm hbase shell
-
-build: build-base ## build main images
-	docker-compose build
-
-build-base: ## build the base images which certain images extend.
-	@{ \
-		pushd docker; \
-		docker build --tag dwp-java:latest --file .java/Dockerfile . ; \
-		docker build --tag dwp-python-preinstall:latest --file ./python/Dockerfile . ; \
-		cp ../settings.gradle.kts ../gradle.properties . ; \
-		docker build --tag dwp-kotlin-slim-gradle-k2hb:latest --file ./gradle/Dockerfile . ; \
-		rm -rf settings.gradle.kts gradle.properties ; \
-		popd; \
-	}
-
-push-local-to-ecr: #Push a temp version of k2hb to AWS DEV ECR
-	@{ \
-		export AWS_DEV_ACCOUNT=$(aws_dev_account); \
-		export TEMP_IMAGE_NAME=$(temp_image_name); \
-		export AWS_DEFAULT_REGION=$(aws_default_region); \
-		aws ecr get-login-password --region ${AWS_DEFAULT_REGION} --profile dataworks-development | docker login --username AWS --password-stdin ${AWS_DEV_ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com; \
-		docker tag kafka2hbase ${AWS_DEV_ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${TEMP_IMAGE_NAME}; \
-		docker push ${AWS_DEV_ACCOUNT}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${TEMP_IMAGE_NAME}; \
-	}
+integration-all:
+	echo "WIP"

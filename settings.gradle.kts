@@ -1,4 +1,4 @@
-rootProject.name = "kafka2hbase"
+rootProject.name = "streaming-data-importer"
 
 buildCache {
     local<DirectoryBuildCache>{
