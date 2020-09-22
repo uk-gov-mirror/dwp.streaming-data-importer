@@ -25,6 +25,9 @@ git-hooks: ## Set up hooks in .git/hooks
 		done \
 	}
 
+services:
+	docker-compose up -d hbase aws-s3 metadatastore
+
 local-build: ## Build Kafka2Hbase with gradle
 	gradle :unit build -x test
 

@@ -1,1 +1,0 @@
-class InvalidMessageException(message: String, cause: Throwable) : Exception(message, cause)

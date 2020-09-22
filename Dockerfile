@@ -8,7 +8,7 @@ RUN mkdir -p /k2hb_builds
 COPY build.gradle.kts .
 
 # Copy the source
-COPY src/ ./src
+COPY legacy ./src
 
 # Create DistTar
 RUN gradle :unit build -x test \

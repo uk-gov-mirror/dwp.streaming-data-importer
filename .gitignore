@@ -32,7 +32,7 @@ out/
 .vscode/
 
 ### local ###
-src/main/python/environment/
+legacy/main/python/environment/
 resources/environment/
 __pycache__
 classes/
@@ -48,3 +48,6 @@ venv/
 env/
 tmp/
 
+gradle/
+gradlew
+gradlew.bat
