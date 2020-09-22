@@ -1,4 +1,4 @@
-package app.configuration.common
+package app.configuration.hbase
 
 import app.properties.HBaseProperties
 import org.apache.hadoop.hbase.HBaseConfiguration

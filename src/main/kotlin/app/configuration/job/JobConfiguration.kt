@@ -1,4 +1,4 @@
-package app.configuration.common
+package app.configuration.job
 
 import app.domain.StreamedBatch
 import org.springframework.batch.core.Job
