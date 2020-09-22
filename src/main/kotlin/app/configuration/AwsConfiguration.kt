@@ -1,5 +1,6 @@
 package app.configuration
 
+import app.properties.AwsProperties
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain
 import com.amazonaws.regions.Regions
@@ -7,18 +8,13 @@ import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.amazonaws.services.secretsmanager.AWSSecretsManager
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
 
 @Configuration
-@ConfigurationProperties(prefix = "aws")
 @Profile("!LOCALSTACK")
-class AwsConfiguration(private val region: String = "eu-west-2",
-                       private val maximumConnections: Int = 1000,
-                       private val timeout: Int = 1800000) {
+class AwsConfiguration(private val properties: AwsProperties) {
 
     @Bean
     fun amazonS3(): AmazonS3 =
@@ -30,18 +26,19 @@ class AwsConfiguration(private val region: String = "eu-west-2",
             }
 
     @Bean
-    fun awsSecretsManager(): AWSSecretsManager = AWSSecretsManagerClientBuilder.standard().withRegion(region).build()
+    fun awsSecretsManager(): AWSSecretsManager =
+            AWSSecretsManagerClientBuilder.standard().withRegion(regions()).build()
 
     private fun regions() =
-            region.toUpperCase().replace("-", "_").run {
+            properties.region.toUpperCase().replace("-", "_").run {
                 Regions.valueOf(this)
             }
 
 
     private fun clientConfiguration() =
             ClientConfiguration().apply {
-                maxConnections = maximumConnections
-                socketTimeout = timeout
+                maxConnections = properties.maximumConnections
+                socketTimeout = properties.timeout
             }
 
 }

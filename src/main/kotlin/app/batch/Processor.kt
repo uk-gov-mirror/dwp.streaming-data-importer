@@ -1,6 +1,5 @@
 package app.batch
 
-import app.domain.HBasePayload
 import app.domain.StreamedBatch
 import org.springframework.batch.item.ItemProcessor
 import org.springframework.stereotype.Component

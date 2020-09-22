@@ -1,10 +1,10 @@
-package app.configuration
+package app.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
+import org.springframework.stereotype.Component
 
-@Configuration
+@Component
 @ConfigurationProperties(prefix="metadatastore")
 @Profile("!LOCALSTACK")
 data class AwsMetadataStoreProperties(val endpoint: String = "",

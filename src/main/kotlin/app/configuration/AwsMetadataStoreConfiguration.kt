@@ -1,5 +1,6 @@
 package app.configuration
 
+import app.properties.AwsMetadataStoreProperties
 import app.services.SecretService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
