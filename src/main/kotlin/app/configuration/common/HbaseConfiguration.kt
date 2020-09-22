@@ -25,7 +25,7 @@ class HbaseConfiguration(private val properties: HBaseProperties) {
     private fun configuration() =
             HBaseConfiguration.create().apply {
                 set(HConstants.ZOOKEEPER_QUORUM, properties.zookeeperQuorum)
-                setInt("hbase.zookeeper.port", 2181)
+                setInt("hbase.zookeeper.port", properties.zookeeperPort)
                 setInt(HConstants.HBASE_RPC_WRITE_TIMEOUT_KEY, properties.rpcTimeoutMs)
                 setInt(HConstants.HBASE_CLIENT_OPERATION_TIMEOUT, properties.clientTimeoutMs)
             }

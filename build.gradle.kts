@@ -27,6 +27,7 @@ dependencies {
     implementation("com.amazonaws:aws-java-sdk-secretsmanager:1.11.819")
     implementation("org.apache.hbase:hbase-client:1.4.13")
     implementation("com.github.dwp:dataworks-common-logging:0.0.5")
+    implementation("mysql:mysql-connector-java:6.0.6")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {

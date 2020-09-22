@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component
 
 @Component
 @ConfigurationProperties(prefix="metadatastore")
-data class MetadataStoreProperties(val endpoint: String = "",
-                                   val port: String = "",
+data class MetadataStoreProperties(var endpoint: String = "metadatastore",
+                                   val port: Int = 3306,
                                    val databaseName: String = "metadatastore",
-                                   val user: String  = "",
+                                   var user: String?  = "",
                                    val passwordSecretName: String = "metadata-store-reconciler",
                                    val caCertPath: String = "./AmazonRootCA1.pem")
