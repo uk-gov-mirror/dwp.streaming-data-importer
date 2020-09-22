@@ -1,4 +1,4 @@
-package app.configuration.aws
+package app.configuration.aws.remote
 
 import app.properties.AwsProperties
 import com.amazonaws.ClientConfiguration

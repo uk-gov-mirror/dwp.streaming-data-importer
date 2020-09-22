@@ -1,4 +1,4 @@
-package app.configuration.aws
+package app.configuration.aws.remote
 
 import app.properties.MetadataStoreProperties
 import app.services.SecretService

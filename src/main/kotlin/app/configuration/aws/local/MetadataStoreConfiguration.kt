@@ -1,4 +1,4 @@
-package app.configuration.localstack
+package app.configuration.aws.local
 
 import app.properties.MetadataStoreProperties
 import org.springframework.context.annotation.Bean
@@ -20,6 +20,7 @@ class MetadataStoreConfiguration(private val properties: MetadataStoreProperties
             "jdbc:mysql://$endpoint:$port/$databaseName"
         }
     }
+
     private val databaseProperties by lazy {
         Properties().apply {
             properties.let {

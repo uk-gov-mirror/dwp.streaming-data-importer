@@ -1,4 +1,4 @@
-package app.configuration.localstack
+package app.configuration.aws.local
 
 import com.amazonaws.ClientConfiguration
 import com.amazonaws.Protocol

@@ -25,8 +25,24 @@ git-hooks: ## Set up hooks in .git/hooks
 		done \
 	}
 
-services:
+metadatastore:
+	docker-compose up -d metadatastore
+	@{ \
+		echo Waiting for metadatastore.; \
+		while ! docker logs metadatastore 2>&1 | grep "^Version" | grep 3306; do \
+			sleep 2; \
+			echo Waiting for metadatastore.; \
+		done; \
+		sleep 5; \
+		echo ...metadatastore ready.; \
+	}
+	docker exec -i metadatastore mysql --user=root --password=password metadatastore  < ./docker/metadatastore/create_table.sql
+	docker exec -i metadatastore mysql --user=root --password=password metadatastore  < ./docker/metadatastore/grant_user.sql
+
+
+services: metadatastore
 	docker-compose up -d hbase aws-s3 metadatastore
+
 
 local-build: ## Build Kafka2Hbase with gradle
 	gradle :unit build -x test

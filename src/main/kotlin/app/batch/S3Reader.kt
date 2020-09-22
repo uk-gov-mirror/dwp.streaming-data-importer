@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 class S3Reader(private val amazonS3: AmazonS3): ItemReader<ByteArray> {
 
     override fun read(): ByteArray? {
-        TODO("Not yet implemented $amazonS3")
+        TODO("Not yet implemented")
     }
 
 }
