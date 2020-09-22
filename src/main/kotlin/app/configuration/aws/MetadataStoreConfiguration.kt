@@ -1,6 +1,6 @@
-package app.configuration
+package app.configuration.aws
 
-import app.properties.AwsMetadataStoreProperties
+import app.properties.MetadataStoreProperties
 import app.services.SecretService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -12,8 +12,8 @@ import java.util.*
 
 @Configuration
 @Profile("!LOCALSTACK")
-class AwsMetadataStoreConfiguration(private val properties: AwsMetadataStoreProperties,
-                                    private val secretService: SecretService) {
+class MetadataStoreConfiguration(private val properties: MetadataStoreProperties,
+                                 private val secretService: SecretService) {
 
     @Bean
     fun metadataStoreConnection(): Connection = DriverManager.getConnection(databaseUrl, databaseProperties)

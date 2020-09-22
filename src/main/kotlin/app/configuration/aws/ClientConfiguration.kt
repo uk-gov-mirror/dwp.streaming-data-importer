@@ -1,4 +1,4 @@
-package app.configuration
+package app.configuration.aws
 
 import app.properties.AwsProperties
 import com.amazonaws.ClientConfiguration
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Profile
 
 @Configuration
 @Profile("!LOCALSTACK")
-class AwsConfiguration(private val properties: AwsProperties) {
+class ClientConfiguration(private val properties: AwsProperties) {
 
     @Bean
     fun amazonS3(): AmazonS3 =
